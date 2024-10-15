@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#4CAF50">
-  <meta http-equiv="Content-Security-Policy" content="connect-src https://tez.google.com/pay">
-  <title>Phonepe mIntent Flow</title>
+  <meta http-equiv="Content-Security-Policy" content="connect-src https://pay.amazon.com">
+  <title>APay mIntent Flow</title>
   <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
 </head>
 <body>
   <div id="contents">
-    <h1>Phonepe mIntent Test</h1>
+    <h1>Apay mIntent Test</h1>
     <!-- Some Merchant code to select/enter product details -->
-    <p><button style="font-weight: bolder;" onclick="onCheckoutClick()">Check PhonePe present</button></p>
+    <p><button style="font-weight: bolder;" onclick="onCheckoutClick()">Check Apay present</button></p>
   </div>
   <pre id="msg"></pre>
   <script>
@@ -28,7 +28,7 @@
             }
 
             const supportedInstruments = [{
-                supportedMethods: "https://tez.google.com/pay",	//For Production
+                supportedMethods: "https://pay.amazon.com",	//For Production
                         // For PhonePe Prod: "https://mercury-t2.phonepe.com/transact/pay",
 
                 data: {
