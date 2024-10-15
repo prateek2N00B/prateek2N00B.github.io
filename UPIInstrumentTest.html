@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#4CAF50">
+    <meta http-equiv="Content-Security-Policy" content="connect-src https://mercury.phonepe.com">
+    <title>Phonepe mIntent Flow</title>
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+</head>
+<body>
+<div id="contents">
+    <h1>Phonepe mIntent Test</h1>
+    <!-- Some Merchant code to select/enter product details -->
+    <p><button style="font-weight: bolder;" onclick="onCheckoutClick()">Check PhonePe present</button></p>
+</div>
+<pre id="logOutput"></pre>
+
+<script>
+    let request;
+
+    // Function to append logs to the webpage
+    function logMessage(message) {
+        const logElement = document.getElementById('logOutput');
+        logElement.textContent += message + '\n';
+    }
+
+    /**
+     * Initializes the payment request object.
+     * @return {PaymentRequest} The payment request object.
+     */
+    function buildPaymentRequest() {
+        if (!window.PaymentRequest) {
+            logMessage("PaymentRequest API is not supported on this browser.");
+            return null;
+        }
+
+        const supportedInstruments = [{
+            supportedMethods: "https://mercury.phonepe.com/transact/pay",	//For Production
+            data: {
+                url: "upi://pay?pa=MERCHANT@ybl&pn=merchant&am=1.00&mam=1.00&tr=7ad44192-69f3-4e38-bebe-8c4944c5bbc6&tn=Payment+for+7ad44192-69f3-4e38-bebe-8c4944c5bbc6&mc=5311&mode=04&purpose=00&utm_campaign=DEBIT&utm_medium=MERCHANTUAT&utm_source=7ad44192-69f3-4e38-bebe-8c4944c5bbc6"
+            }
+        }];
+
+        const details = {
+            id: "1111-71ca4e9f-748c-4de7-af7b-000000001111-temp", //A unique id [optional], if not passed browser will generate one
+            total: {
+                label: 'Total',
+                amount: {
+                    currency: 'INR',
+                    value: '100',
+                }
+            }
+        };
+
+        try {
+            request = new PaymentRequest(supportedInstruments, details);
+            logMessage("PaymentRequest initialized: " + JSON.stringify(request));
+
+            if (typeof request.hasEnrolledInstrument === 'function') {
+                request.hasEnrolledInstrument().then(function(result) {
+                    logMessage("hasEnrolledInstrument: " + result);
+                    if (result) {
+                        logMessage("PhonePe is available.");
+                    } else {
+                        logMessage("PhonePe is not available.");
+                    }
+                }).catch(function(err) {
+                    logMessage("Error in hasEnrolledInstrument: " + err);
+                });
+            } else {
+                request.canMakePayment().then(function(result) {
+                    logMessage("canMakePayment: " + result);
+                    if (result) {
+                        logMessage("PhonePe can make payment.");
+                    } else {
+                        logMessage("PhonePe cannot make payment.");
+                    }
+                }).catch(function(err) {
+                    logMessage("Error in canMakePayment: " + err);
+                });
+            }
+        } catch (e) {
+            logMessage("Error initializing PaymentRequest: " + e.message);
+        }
+    }
+
+    /**
+     * Create payment request object for Phonepe payment.
+     */
+    function onCheckoutClick() {
+        buildPaymentRequest();
+    }
+</script>
+</body>
+</html>
