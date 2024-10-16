@@ -64,7 +64,7 @@
                     }).catch(function(err) {
                         alert("hasEnrolledInstrument"+err);
                         console.log(err+"hasEnrolledInstrument");
-                        handleError(err); //handle error
+                        //handleError(err); //handle error
                     });
                 } else {
                     request.canMakePayment().then(function(result) {
@@ -80,12 +80,13 @@
                         }
                     }).catch(function(err) {
                         console.log(err);
-                        handleError(err);
+                        //handleError(err);
                     });
                 }
 
             } catch (e) {
-                handleError(e);
+                console.log(e);
+                //handleError(e);
             }
         }
 
