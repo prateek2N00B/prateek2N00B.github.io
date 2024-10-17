@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#4CAF50">
-  <meta http-equiv="Content-Security-Policy" content="connect-src https://google.com/pay">
+  <meta http-equiv="Content-Security-Policy" content="connect-src https://amazonpay.in">
   <title>APay mIntent Flow</title>
   <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
 </head>
@@ -28,12 +28,12 @@
             }
 
             const supportedInstruments = [{
-                supportedMethods: "https://google.com/pay",	//For Production
+                supportedMethods: "https://amazonpay.in",	//For Production
                         // For PhonePe Prod: "https://mercury-t2.phonepe.com/transact/pay",
 
                 data: {
                     //url: redirectUrl //To pass redirect url from v4/debit response
-                    url: "upi:/pay?pa=MERCHANT@ybl&pn=merchant&am=1.00&mam=1.00&tr=7ad44192-69f3-4e38-bebe-8c4944c5bbc6&tn=Payment+for+7ad44192-69f3-4e38-bebe-8c4944c5bbc6&mc=5311&mode=04&purpose=00&utm_campaign=DEBIT&utm_medium=MERCHANTUAT&utm_source=7ad44192-69f3-4e38-bebe-8c4944c5bbc6"
+                    url: "upi://pay?pa=kuhsalstores5918%40apl&pn=KushalStore&tn=Test%20transaction&mc=0000&am=1&cu=INR"
                 }
             }];
 
