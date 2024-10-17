@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#4CAF50">
-  <meta http-equiv="Content-Security-Policy" content="connect-src amazonpay://">
+  <meta http-equiv="Content-Security-Policy" content="connect-src https://amazonpay.in">
   <title>APay mIntent Flow</title>
   <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
 </head>
@@ -28,7 +28,7 @@
             }
 
             const supportedInstruments = [{
-                supportedMethods: "amazonpay://",	//For Production
+                supportedMethods: "https://amazonpay.in",	//For Production
                         // For PhonePe Prod: "https://mercury-t2.phonepe.com/transact/pay",
 
                 data: {
