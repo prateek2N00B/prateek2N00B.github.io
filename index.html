@@ -97,6 +97,11 @@
             buildPaymentRequest();
         }
 
+        const upiUrl = 'amazonpay://upi:/pay?pa=merchant@upi&pn=Merchant+Name&mc=1234&tid=1234567890&tr=TR1234567890&tn=Payment+for+services&am=500.00&cu=INR';
+        const intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(upiUrl));
+        console.log(intent)
+
 
         /**
          * Handles the response from PaymentRequest.show().
