@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#4CAF50">
   <meta http-equiv="Content-Security-Policy" content="connect-src https://tez.google.com/pay">
-  <title>APay mIntent Flow</title>
+  <title>Phonepe mIntent Flow</title>
   <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
 </head>
 <body>
   <div id="contents">
-    <h1>Apay mIntent Test</h1>
+    <h1>Phonepe mIntent Test</h1>
     <!-- Some Merchant code to select/enter product details -->
-    <p><button style="font-weight: bolder;" onclick="onCheckoutClick()">Check Apay present</button></p>
+    <p><button style="font-weight: bolder;" onclick="onCheckoutClick()">Check PhonePe present</button></p>
   </div>
   <pre id="msg"></pre>
   <script>
@@ -64,7 +64,7 @@
                     }).catch(function(err) {
                         alert("hasEnrolledInstrument"+err);
                         console.log(err+"hasEnrolledInstrument");
-                        //handleError(err); //handle error
+                        handleError(err); //handle error
                     });
                 } else {
                     request.canMakePayment().then(function(result) {
@@ -79,14 +79,12 @@
                             alert("2. canMakePayment - "+result);
                         }
                     }).catch(function(err) {
-                        console.log(err);
-                        //handleError(err);
+                        handleError(err);
                     });
                 }
 
             } catch (e) {
-                console.log(e);
-                //handleError(e);
+                handleError(e);
             }
         }
 
@@ -96,6 +94,8 @@
         function onCheckoutClick() {
             buildPaymentRequest();
         }
+
+
         /**
          * Handles the response from PaymentRequest.show().
          */
