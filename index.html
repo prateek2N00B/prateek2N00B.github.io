@@ -33,7 +33,7 @@
 
                 data: {
                     //url: redirectUrl //To pass redirect url from v4/debit response
-                    url: "upi://pay?pa=kuhsalstores5918%40apl&pn=KushalStore&tn=Test%20transaction&mc=0000&am=1&cu=INR"
+                    url: "upi://pay?pa=MERCHANT@ybl&pn=merchant&am=1.00&mam=1.00&tr=7ad44192-69f3-4e38-bebe-8c4944c5bbc6&tn=Payment+for+7ad44192-69f3-4e38-bebe-8c4944c5bbc6&mc=5311&mode=04&purpose=00&utm_campaign=DEBIT&utm_medium=MERCHANTUAT&utm_source=7ad44192-69f3-4e38-bebe-8c4944c5bbc6"
                 }
             }];
 
@@ -96,13 +96,6 @@
         function onCheckoutClick() {
             buildPaymentRequest();
         }
-
-        const upiUrl = 'amazonpay://upi:/pay?pa=merchant@upi&pn=Merchant+Name&mc=1234&tid=1234567890&tr=TR1234567890&tn=Payment+for+services&am=500.00&cu=INR';
-        const intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(upiUrl));
-        console.log(intent)
-
-
         /**
          * Handles the response from PaymentRequest.show().
          */
