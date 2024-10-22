@@ -15,6 +15,7 @@
     <p><button style="font-weight: bolder;" onclick="onCheckoutClick()">Check PhonePe present</button></p>
   </div>
   <pre id="msg"></pre>
+  <div id="requestOutput"></div>
   <script>
         let request;
 
@@ -51,6 +52,7 @@
             try {
                 request = new PaymentRequest(supportedInstruments, details);
                 console.log(request);
+                document.getElementById("requestOutput").innerHTML = JSON.stringify(request, null, 2);
                 if (typeof request.hasEnrolledInstrument === 'function') {
                     request.hasEnrolledInstrument().then(function(result) {
                         console.log("hasEnrolledInstrument - "+result);
