@@ -70,16 +70,7 @@
     function onCheckoutClick() {
         buildPaymentRequest();
         if (request) {
-            try {
-                request.show()
-                    .then(handlePaymentResponse)
-                    .catch(function(err) {
-                        console.error("Error during request.show:", err);
-                        alert("Error during request.show: " + err);
-                    });
-            } catch (e) {
-                console.error("Error in request.show:", e);
-            }
+            handlePaymentResponse(request);
         }
     }
 
