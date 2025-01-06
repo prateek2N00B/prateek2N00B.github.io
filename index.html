@@ -25,7 +25,7 @@
         }
 
         const supportedInstruments = [{
-            supportedMethods: "https://prateekpay.netlify.app/",
+            supportedMethods: "https://prateekpay.netlify.app/intent/pay/checkStatus/",
             data: {
                 url: "upi://pay?pa=MERCHANT@ybl&pn=merchant&am=1.00&mam=1.00&tr=7ad44192-69f3-4e38-bebe-8c4944c5bbc6&tn=Payment+for+7ad44192-69f3-4e38-bebe-8c4944c5bbc6&mc=5311&mode=04&purpose=00"
             }
@@ -43,7 +43,7 @@
             request = new PaymentRequest(supportedInstruments, details);
             console.log("PaymentRequest created:", request);
 
-            if (typeof request.hasEnrolledInstrument === 'function') {
+            /*if (typeof request.hasEnrolledInstrument === 'function') {
                 request.hasEnrolledInstrument().then(function(result) {
                     console.log("hasEnrolledInstrument:", result);
                     alert("hasEnrolledInstrument - " + result);
@@ -51,7 +51,7 @@
                     console.error("Error in hasEnrolledInstrument:", err);
                     alert("Error in hasEnrolledInstrument: " + err);
                 });
-            } else {
+            } else {*/
                 request.canMakePayment().then(function(result) {
                     console.log("canMakePayment:", result);
                     alert("canMakePayment - " + result);
@@ -59,7 +59,7 @@
                     console.error("Error in canMakePayment:", err);
                     alert("Error in canMakePayment: " + err);
                 });
-            }
+            //}
 
         } catch (e) {
             console.error("Error in building PaymentRequest:", e);
