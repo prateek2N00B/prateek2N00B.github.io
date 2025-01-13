@@ -40,8 +40,22 @@
         };
 
         try {
-            request = new PaymentRequest(supportedInstruments, details);
-            console.log("PaymentRequest created:", request);
+          const paymentRequest = new PaymentRequest(
+          [
+            {
+              supportedMethods: 'https://prateekpay.netlify.app/payment-method-manifest.json',
+            },
+          ],
+          {
+            total: {
+              label: 'Total',
+              amount: { currency: 'USD', value: '10.00' },
+            },
+          }
+        );
+
+            //request = new PaymentRequest(supportedInstruments, details);
+            //console.log("PaymentRequest created:", request);
 
             /*if (typeof request.hasEnrolledInstrument === 'function') {
                 request.hasEnrolledInstrument().then(function(result) {
@@ -52,7 +66,7 @@
                     alert("Error in hasEnrolledInstrument: " + err);
                 });
             } else {*/
-                request.canMakePayment().then(function(result) {
+                paymentRequest.canMakePayment().then(function(result) {
                     console.log("canMakePayment:", result);
                     alert("canMakePayment - " + result);
                 }).catch(function(err) {
