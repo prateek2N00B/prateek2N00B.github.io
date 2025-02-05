@@ -14,23 +14,19 @@
   <pre id="msg"></pre>
   <div id="requestOutput"></div>
   <div id="responseOutput"></div> <!-- Element to display PaymentResponse details -->
-
   <script>
     let request;
-
     function buildPaymentRequest() {
         if (!window.PaymentRequest) {
             console.error("PaymentRequest API is not supported.");
             return null;
         }
-      
         const supportedInstruments = [{
-            supportedMethods: "https://prateekpay.netlify.app/",
+            supportedMethods: 'https://amazonpay.amazon.in/intent/pay/checkStatus',
             data: {
                 url: "upi://pay?pa=MERCHANT@ybl&pn=merchant&am=1.00&mam=1.00&tr=7ad44192-69f3-4e38-bebe-8c4944c5bbc6&tn=Payment+for+7ad44192-69f3-4e38-bebe-8c4944c5bbc6&mc=5311&mode=04&purpose=00"
             }
         }];
-
         const details = {
             id: "1111-71ca4e9f-748c-4de7-af7b-000000001111-temp",
             total: {
@@ -38,25 +34,9 @@
                 amount: { currency: 'INR', value: '100' }
             }
         };
-
         try {
-          const paymentRequest = new PaymentRequest(
-          [
-            {
-              supportedMethods: 'https://prateekpay.netlify.app/payment-method-manifest.json',
-            },
-          ],
-          {
-            total: {
-              label: 'Total',
-              amount: { currency: 'USD', value: '10.00' },
-            },
-          }
-        );
-
-            //request = new PaymentRequest(supportedInstruments, details);
-            //console.log("PaymentRequest created:", request);
-
+            request = new PaymentRequest(supportedInstruments, details);
+            console.log("PaymentRequest created:", request);
             /*if (typeof request.hasEnrolledInstrument === 'function') {
                 request.hasEnrolledInstrument().then(function(result) {
                     console.log("hasEnrolledInstrument:", result);
@@ -66,7 +46,7 @@
                     alert("Error in hasEnrolledInstrument: " + err);
                 });
             } else {*/
-                paymentRequest.canMakePayment().then(function(result) {
+                request.canMakePayment().then(function(result) {
                     console.log("canMakePayment:", result);
                     alert("canMakePayment - " + result);
                 }).catch(function(err) {
@@ -74,16 +54,13 @@
                     alert("Error in canMakePayment: " + err);
                 });
             //}*/
-
         } catch (e) {
             console.error("Error in building PaymentRequest:", e);
         }
     }
-
     function onCheckoutClick() {
         buildPaymentRequest();
     }
-
     function handlePaymentResponse(response) {
         console.log("PaymentResponse received:", response);
         document.getElementById("responseOutput").innerHTML = `
@@ -94,7 +71,6 @@
             <p><strong>Payer Email:</strong> ${response.payerEmail}</p>
             <p><strong>Payer Phone:</strong> ${response.payerPhone}</p>
         `;
-
         response.complete("success").catch((err) => {
             console.error("Error completing payment:", err);
         });
